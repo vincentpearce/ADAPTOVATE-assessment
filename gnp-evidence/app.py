@@ -34,7 +34,7 @@ with st.sidebar:
 
 if go:
     if src.startswith('Bundled'):
-        files, _ = parse_folder('interviews')
+        files, _ = parse_folder(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'interviews'))
         questions = load_questions()
     else:
         if not uploads:
