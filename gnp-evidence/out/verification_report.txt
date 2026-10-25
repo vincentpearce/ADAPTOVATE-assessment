@@ -1,0 +1,8 @@
+GNP evidence pipeline: verification report
+Run 2026-10-26 03:57 · model claude-sonnet-5-5
+Files: interview_1_President_and_CEO.txt, interview_2_Chief_Operating_Officer.txt, interview_3_Head_of_Learning.txt, interview_4_Head_of_Org_Effectiveness.txt, interview_5_Project_Manager.txt (163 lines)
+
+154 quotes extracted · 154 verified word-for-word · 0 matched after normalisation · 0 failures
+
+
+Agreement with reference coding: 89.6% of 163 lines (Cohen's kappa 0.88)

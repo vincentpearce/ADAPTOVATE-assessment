@@ -1,0 +1,1 @@
+Reference coding: I chose the themes; line-by-line labels were drafted with AI. I personally reviewed the 8 lines where the AI and the reference disagreed on "Decisions wait at the top" (kept 5, changed 3). Other differences are not yet reviewed.

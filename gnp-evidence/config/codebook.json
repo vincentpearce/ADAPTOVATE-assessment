@@ -1,0 +1,159 @@
+{
+ "lead": [
+  "D1",
+  "C2",
+  "C5"
+ ],
+ "outcome": [
+  "O1"
+ ],
+ "codes": [
+  {
+   "code": "O1",
+   "level": "Outcome",
+   "name": "Grantees experience GNP as slow, hard to work with and fragmented",
+   "definition": "What grantees reportedly want or complain about, and the grantee risk. All secondhand: no grantee was interviewed.",
+   "include": "Grantee needs, complaints, satisfaction, target grantee experience",
+   "exclude": "Internal causes of the delay (go to C1 to C4)",
+   "short": "Grantees find GNP slow and hard to work with",
+   "show": true
+  },
+  {
+   "code": "O2",
+   "level": "Outcome",
+   "name": "Staff energy is held back by how GNP works",
+   "definition": "Staff frustration, stifled creativity, appetite for change",
+   "include": "Lines about how staff feel or what they want",
+   "exclude": "Staff resistance to change (C7)",
+   "short": "Staff energy is held back by how GNP works",
+   "show": false
+  },
+  {
+   "code": "D1",
+   "level": "Cause",
+   "name": "Decisions travel to the top and wait there",
+   "definition": "Decision rights are unstated and concentrated at the top, so approvals and decisions travel up to the CEO and Executive Council and wait there",
+   "include": "Escalation, sign-offs, hierarchy, slow or circular decisions, unclear decision rights, roles and accountability, matrix reporting",
+   "exclude": "Late involvement of support functions (C4)",
+   "short": "Decisions wait at the top",
+   "show": true
+  },
+  {
+   "code": "C2",
+   "level": "Cause",
+   "name": "Teams plan and work in silos, so GNP shows up as several foundations",
+   "definition": "Departments plan, fund and engage separately and compete for budget",
+   "include": "Silos, cross team cooperation, separate planning, multiple GNPs in one community",
+   "exclude": "Late involvement of support functions (C4)",
+   "short": "Teams work apart",
+   "show": true
+  },
+  {
+   "code": "C4",
+   "level": "Cause",
+   "name": "Support functions join too late and hold up grants",
+   "definition": "Grant services, contracting and grant management are looped in late and stall the grant",
+   "include": "Handoffs to grant services, contracting, grant management",
+   "exclude": "General silos between program teams (C2)",
+   "short": "Support teams join too late and hold up grants",
+   "show": true
+  },
+  {
+   "code": "C5",
+   "level": "Cause",
+   "name": "GNP's cross-team ambition depends on skills that are reported as missing",
+   "definition": "The cross-team working the CEO and COO want needs skills that 4 of 5 interviewees say are missing. Not yet measured: client plans to assess skills in phase 2 and 3 (I5-L44).",
+   "include": "Skill gaps, generalist vs expert, hiring model, planning and resourcing skills",
+   "exclude": "Leaders managing people (C6)",
+   "short": "Skills lag the ambition",
+   "show": true
+  },
+  {
+   "code": "C6",
+   "level": "Cause",
+   "name": "Leaders rose as program experts and are still learning to lead people",
+   "definition": "Leadership capability and the coaching investment to move away from command and control",
+   "include": "Leader capability, coaching, leadership alignment, prioritisation by leaders",
+   "exclude": "Structural escalation (C1)",
+   "short": "Leaders are still learning to lead people",
+   "show": true
+  },
+  {
+   "code": "C7",
+   "level": "Cause",
+   "name": "Change is communicated badly, so rumours and resistance fill the gap",
+   "definition": "Poor change communication plus past scars drive resistance and the flavor-of-the-year view",
+   "include": "Change communication, readiness, resistance, rumours, past restructures",
+   "exclude": "Day to day cross team communication (C2)",
+   "short": "Change is communicated badly",
+   "show": true
+  },
+  {
+   "code": "S1",
+   "level": "Strength",
+   "name": "Strengths to preserve: people, mission, values, peers",
+   "definition": "What interviewees want kept through the change",
+   "include": "Values, mission, people, peers, passion, community engagement model",
+   "exclude": "Proof that new ways work (S2)",
+   "short": "Strengths to keep",
+   "show": true
+  },
+  {
+   "code": "S2",
+   "level": "Strength",
+   "name": "Cross team working already works when it is tried",
+   "definition": "GNP evidence that the target way of working has succeeded",
+   "include": "Strategy papers process and similar successes",
+   "exclude": "Aspirations for future teams (X1)",
+   "short": "Cross-team work succeeds when it is tried",
+   "show": true
+  },
+  {
+   "code": "X1",
+   "level": "Context",
+   "name": "CEO ambition, strategy and history",
+   "definition": "Background that frames the case but is not itself a problem",
+   "include": "Ambition, strategy, mission, geographies, success definitions, org history",
+   "exclude": "Anything describing a problem",
+   "short": "CEO ambition, strategy and history",
+   "show": false
+  },
+  {
+   "code": "X2",
+   "level": "Context",
+   "name": "Incumbent change vendor",
+   "definition": "Lines about the vendor (Q4)",
+   "include": "Vendor reporting, priority, decisions",
+   "exclude": "",
+   "short": "Incumbent change vendor",
+   "show": false
+  },
+  {
+   "code": "X3",
+   "level": "Context",
+   "name": "What staff need to see in implementation",
+   "definition": "Requests and constraints for how change is rolled out",
+   "include": "Pilots, examples, tools, implementation constraints",
+   "exclude": "Communication of change (C7)",
+   "short": "What staff need to see in implementation",
+   "show": false
+  },
+  {
+   "code": "NONE",
+   "level": "None",
+   "name": "Fits no theme",
+   "definition": "Use when a line fits none of the themes above. Do not force a fit.",
+   "include": "",
+   "exclude": "",
+   "short": "Fits no theme",
+   "show": false
+  }
+ ],
+ "supporting": [
+  "C7",
+  "C4",
+  "C6",
+  "S1",
+  "S2"
+ ]
+}
