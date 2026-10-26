@@ -3,7 +3,10 @@ files, view the evidence matrix and verification report, and ask questions.
 
     streamlit run app.py
 """
+import io
 import os
+import tempfile
+import zipfile
 
 import streamlit as st
 import streamlit.components.v1 as components
@@ -12,7 +15,7 @@ from gnp.ask import ask
 from gnp.llm import LLM
 from gnp.parse import parse_folder
 from gnp.pipeline import load_questions, run
-from gnp.report import dashboard, show, summary_line, verification_text
+from gnp.report import dashboard, show, summary_line, verification_text, write_outputs
 
 st.set_page_config(page_title='GNP Evidence Pipeline', layout='wide')
 
@@ -45,6 +48,17 @@ if go:
     with st.spinner('Tagging every line and verifying quotes...'):
         st.session_state.res = run(files, inject=inject, questions=questions)
 
+def outputs_zip(res):
+    """The four files run_pipeline.py writes to out/, zipped for download."""
+    with tempfile.TemporaryDirectory() as d:
+        write_outputs(res, d)
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
+            for name in sorted(os.listdir(d)):
+                z.write(os.path.join(d, name), name)
+        return buf.getvalue()
+
+
 res = st.session_state.get('res')
 if not res:
     st.info('Choose the interview files and press Run pipeline.')
@@ -57,6 +71,8 @@ tab1, tab2, tab3 = st.tabs(['Evidence matrix', 'Ask the interviews', 'Verificati
 with tab1:
     html = dashboard(res)
     st.download_button('Download dashboard (HTML)', html, file_name='evidence_matrix.html', mime='text/html')
+    st.download_button('Download all outputs (zip)', outputs_zip(res), file_name='gnp_outputs.zip', mime='application/zip',
+                       help='evidence_matrix.html, verification_report.txt, evidence.csv and results.json, the same files the command line writes to out/')
     components.html(html, height=1400, scrolling=True)
 with tab2:
     q = st.text_input('Question')
