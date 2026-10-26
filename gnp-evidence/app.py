@@ -50,6 +50,8 @@ if not res:
     st.info('Choose the interview files and press Run pipeline.')
     st.stop()
 
+for w in res.get('warnings', []):
+    st.warning(w)
 st.subheader(summary_line(res['verification']))
 tab1, tab2, tab3 = st.tabs(['Evidence matrix', 'Ask the interviews', 'Verification report'])
 with tab1:

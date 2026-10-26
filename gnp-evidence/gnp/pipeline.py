@@ -6,7 +6,7 @@ import os
 
 from .ask import ask
 from .llm import LLM, MODEL
-from .parse import parse_texts
+from .parse import parse_texts, parse_warnings
 from .tag import agreement, inject_fake, tag_units, verification_summary
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,6 +38,7 @@ def run(files, codebook=None, gold=None, inject=False, questions=None, llm=None)
     gold = load_gold() if gold is None else gold
     llm = llm or LLM()
     units = parse_texts(files)
+    file_counts, warnings = parse_warnings(files, units)
     # human labels only apply to lines whose ID and exact text match the coded GNP set,
     # so new or edited files are never scored against the wrong label
     gold = {u['id']: gold[u['id']][0] for u in units if u['id'] in gold and gold[u['id']][1] == u['text']}
@@ -47,7 +48,8 @@ def run(files, codebook=None, gold=None, inject=False, questions=None, llm=None)
     agr = agreement(records, gold) if gold else None
     gold_n = len(gold)
     qa = [ask(q, units, llm) for q in (questions or [])]
-    return dict(units=units, records=records, problems=problems, verification=ver, agreement=agr, qa=qa,
+    return dict(units=units, records=records, problems=problems, warnings=warnings, file_counts=file_counts,
+                verification=ver, agreement=agr, qa=qa,
                 injected=fake, codebook=codebook,
                 meta=dict(files=sorted(files), lines=len(units), model='TEST MODE (no model called)' if llm.mock else MODEL,
                           mock=llm.mock, calls=llm.calls, gold_lines=gold_n,

@@ -52,7 +52,13 @@ def write_outputs(res, out):
 def verification_text(res):
     v, m = res['verification'], res['meta']
     lines = ['GNP evidence pipeline: verification report', f"Run {m['run_at']} · model {m['model']}",
-             f"Files: {', '.join(m['files'])} ({m['lines']} lines)", '', summary_line(v), '']
+             f"Files: {', '.join(m['files'])} ({m['lines']} lines)"]
+    counts = res.get('file_counts', {})
+    if counts:
+        lines += ['Lines read per file: ' + ', '.join(f"{k} {n}" for k, n in counts.items())]
+    if res.get('warnings'):
+        lines += ['', 'WARNINGS (check these files before trusting the results):'] + ['  ' + w for w in res['warnings']]
+    lines += ['', summary_line(v), '']
     for r in v['failures']:
         lines.append(f"FAILED {r['id']} ({r['file']} line {r['line']}){' [injected test quote]' if r['injected'] else ''}")
         lines.append(f"  quote : {r['quote']}")
@@ -64,7 +70,9 @@ def verification_text(res):
         lines += ['', 'Model output problems (handled):'] + ['  ' + p for p in res['problems']]
     a = res['agreement']
     if a:
-        lines += ['', f"Agreement with reference coding: {a['agree']}% of {a['n']} lines (Cohen's kappa {a['kappa']})"]
+        lines += ['', f"Agreement with reference coding: {a['agree']}% of {a['n']} lines (Cohen's kappa {a['kappa']})",
+                  'Reference labels were drafted with AI and only partly reviewed by a person (see config/reference_note.txt),',
+                  'so this measures consistency, not agreement with independent human coding.']
     return '\n'.join(lines) + '\n'
 
 
@@ -152,11 +160,13 @@ def dashboard(res):
          f"<div class='sub'>{len(m['files'])} interview files · {m['lines']} lines · run {e(m['run_at'])} · Confidential</div>"]
     if m['mock']:
         p.append("<div class='banner'>TEST MODE: no AI model was called. Themes come from the reference coding.</div>")
+    for w in res.get('warnings', []):
+        p.append(f"<div class='banner'>WARNING: {e(w)}</div>")
     p.append("<div class='stats'>"
              f"<div class='stat'><b>{v['extracted']}</b><span>quotes pulled from the interviews</span></div>"
              f"<div class='stat'><b class='{'bad' if fails else 'ok'}'>{v['exact']}</b><span>match the source word for word</span></div>"
              f"<div class='stat'><b class='{'bad' if fails else 'ok'}'>{len(fails)}</b><span>{'quote' if len(fails) == 1 else 'quotes'} not found in the source</span></div>"
-             + (f"<div class='stat'><b>{a['agree']}%</b><span>of lines themed the same way by the AI and by me</span></div>" if a else '')
+             + (f"<div class='stat'><b>{a['agree']}%</b><span>of lines match the reference coding (AI-drafted labels, partly reviewed by me)</span></div>" if a else '')
              + "</div>")
     if fails:
         p.append("<h2>Quotes that failed the check</h2><div class='wrap'><table><tr><th>Quote returned</th><th>What the source actually says</th></tr>" +
@@ -181,8 +191,8 @@ def dashboard(res):
     if a and a['disagreements']:
         rows = [d for d in a['disagreements'] if d['model'] in shown or d['human'] in shown]
         if rows:
-            p.append(f"<details class='theme'><summary><span class='tname'>Where the AI and I themed a line differently ({len(rows)})</span></summary>"
-                     "<div class='wrap'><table><tr><th>Line</th><th>AI put it under</th><th>I put it under</th></tr>" +
+            p.append(f"<details class='theme'><summary><span class='tname'>Where the AI and the reference coding differ ({len(rows)})</span></summary>"
+                     "<div class='wrap'><table><tr><th>Line</th><th>AI put it under</th><th>Reference coding put it under</th></tr>" +
                      ''.join(f"<tr><td>{e(d['text'])}</td><td>{e(_name(cb, d['model']) if d['model'] in shown else 'Not a theme')}</td>"
                              f"<td>{e(_name(cb, d['human']) if d['human'] in shown else 'Not a theme')}</td></tr>" for d in rows) +
                      "</table></div></details>")

@@ -23,6 +23,8 @@ write_outputs(res, args.out)
 print(summary_line(res['verification']))
 if res['agreement']:
     print(f"Agreement with reference coding: {res['agreement']['agree']}% (kappa {res['agreement']['kappa']})")
+for w in res['warnings']:
+    print('WARNING:', w)
 for p in res['problems']:
     print('note:', p)
 print(f"Wrote {args.out}/evidence_matrix.html, evidence.csv, verification_report.txt, results.json")

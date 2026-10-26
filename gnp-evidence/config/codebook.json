@@ -35,7 +35,7 @@
    "definition": "Decision rights are unstated and concentrated at the top, so approvals and decisions travel up to the CEO and Executive Council and wait there",
    "include": "Escalation, sign-offs, hierarchy, slow or circular decisions, unclear decision rights, roles and accountability, matrix reporting",
    "exclude": "Late involvement of support functions (C4)",
-   "short": "Decisions wait at the top",
+   "short": "Decision rights sit too high and are unclear",
    "show": true
   },
   {
@@ -45,7 +45,7 @@
    "definition": "Departments plan, fund and engage separately and compete for budget",
    "include": "Silos, cross team cooperation, separate planning, multiple GNPs in one community",
    "exclude": "Late involvement of support functions (C4)",
-   "short": "Teams work apart",
+   "short": "Teams don't coordinate at the start",
    "show": true
   },
   {
@@ -55,7 +55,7 @@
    "definition": "Grant services, contracting and grant management are looped in late and stall the grant",
    "include": "Handoffs to grant services, contracting, grant management",
    "exclude": "General silos between program teams (C2)",
-   "short": "Support teams join too late and hold up grants",
+   "short": "Compliance joins too late and holds up grants",
    "show": true
   },
   {
@@ -65,7 +65,7 @@
    "definition": "The cross-team working the CEO and COO want needs skills that 4 of 5 interviewees say are missing. Not yet measured: client plans to assess skills in phase 2 and 3 (I5-L44).",
    "include": "Skill gaps, generalist vs expert, hiring model, planning and resourcing skills",
    "exclude": "Leaders managing people (C6)",
-   "short": "Skills lag the ambition",
+   "short": "Skills gaps limit cross-team work",
    "show": true
   },
   {
@@ -150,8 +150,8 @@
   }
  ],
  "supporting": [
-  "C7",
   "C4",
+  "C7",
   "C6",
   "S1",
   "S2"

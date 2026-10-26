@@ -1,4 +1,5 @@
 # One question per line. Pre-run answers appear in the dashboard.
 Why do grants take so long?
+Who approves vacations and vendor contracts?
 What did the incumbent change vendor conclude about structure?
 How many approval signatures does a grant over $100k need?
